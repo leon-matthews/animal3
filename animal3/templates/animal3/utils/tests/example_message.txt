@@ -1,0 +1,10 @@
+
+Dear {{ first_name }}.
+
+I was sorry to hear about {{ problem }}. We all hope that the situation is resolved
+to your satisfaction shortly. {{ companion }} and I will be travelling to assist you
+as soon as can be arranged.
+
+Yours, etc.
+
+    {{ sender }}

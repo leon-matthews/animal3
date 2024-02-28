@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-nz" >
+<head>
+<title>Log in | Skeleton Administration</title>
+<link rel="stylesheet" type="text/css" href="/s/admin/css/base.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/s/admin/css/login.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/s/animal3/css/admin.css" type="text/css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+const arx_content_css = "/s/lib/article2/css/arx-content.min.css";
+const arx_frame_css = "/s/lib/article2/css/arx-frame.min.css";
+</script>
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/s/admin/css/responsive.css">
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" login"
+  data-admin-utc-offset="46800">
+
+<!-- Container -->
+<div id="container">
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+
+<h1 id="site-name">Skeleton</h1>
+
+        </div>
+
+
+    </div>
+    <!-- END Header -->
+
+    <!-- Admin navigation -->
+
+
+    <!-- Content -->
+    <div id="content" class="colM">
+
+<div id="content-main">
+
+<form action="/admin/login/" method="post" id="login-form">
+<input type="hidden" name="csrfmiddlewaretoken" value="Wb9lQzbuQ3hMqGZ1CWl1Lpg70p447wnSRYmb91C7RvfSpTWX33vm4u4x2sLkTddd">
+  <div class="form-row">
+
+    <label class="required" for="id_username">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+  </div>
+  <div class="form-row">
+
+    <label class="required" for="id_password">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+    <input type="hidden" name="next" value="/admin/">
+  </div>
+
+
+  <div class="submit-row">
+    <input type="submit" value="Log in">
+  </div>
+</form>
+
+</div>
+
+        <div id="content-extra">
+
+        </div>
+
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+[
+{
+    "model": "blog.category",
+    "pk": 1,
+    "fields": {
+        "title": "Events",
+        "slug": "events"
+    }
+},
+{
+    "model": "blog.category",
+    "pk": 2,
+    "fields": {
+        "title": "Product News",
+        "slug": "product-news"
+    }
+},
+{
+    "model": "blog.entry",
+    "pk": 1,
+    "fields": {
+        "title": "NZWOOD's innovative offerings nail it at BUILDNZ",
+        "slug": "nzwood-buildnz-2013",
+        "cover_image": "story/image/2013/06/24/buildnz2.jpg",
+        "published": "2013-07-08T00:33:58Z",
+        "category": 1,
+        "featured": true,
+        "status": 1,
+        "created": "2013-06-20T04:07:02.490Z",
+        "updated": "2013-07-09T01:09:09.435Z"
+    }
+},
+{
+    "model": "blog.entry",
+    "pk": 2,
+    "fields": {
+        "title": "I-Built Engineered Wood Products Highest Quality and Sustainable",
+        "slug": "i-built-engineered-wood-products-highest-quality-a",
+        "cover_image": "story/image/2013/07/29/_DSC7718.jpg",
+        "published": "2013-07-29T02:27:52Z",
+        "category": 1,
+        "featured": true,
+        "status": 1,
+        "created": "2013-07-29T02:43:18.776Z",
+        "updated": "2013-07-30T02:29:34.905Z"
+    }
+},
+{
+    "model": "blog.entry",
+    "pk": 3,
+    "fields": {
+        "title": "Safe, Reliable Scaffold J-Planks",
+        "slug": "safe-reliable-scaffold-j-planks",
+        "cover_image": "story/image/2013/09/26/IMG_50661.jpg",
+        "published": "2013-09-26T02:18:45Z",
+        "category": 1,
+        "featured": true,
+        "status": 1,
+        "created": "2013-09-26T02:26:50.533Z",
+        "updated": "2013-10-23T01:03:18.910Z"
+    }
+}
+]

@@ -1,0 +1,16 @@
+[
+{
+    "model": "blog.category",
+    "fields": {
+        "title": "Events",
+        "slug": "events"
+    }
+},
+{
+    "model": "blog.category",
+    "fields": {
+        "title": "Product News",
+        "slug": "product-news"
+    }
+}
+]
