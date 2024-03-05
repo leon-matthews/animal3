@@ -1,6 +1,7 @@
 
 import collections
 import decimal
+from itertools import zip_longest
 import json
 import keyword
 from pathlib import Path
@@ -848,8 +849,8 @@ def sentences(string: str, number: int = 1) -> str:
     as error prone.  Advanced sentence tokenising should be left to an advanced
     project like http://nltk.org/
     """
-    parts = re.split(r"([\.\?\!]+)", string, maxsplit=number)
-    return "".join(parts[:number * 2]).strip()
+    parts = split_sentences(string, maxsplit=number)
+    return " ".join(parts[:number]).strip()
 
 
 def shorten(given: str, max_length: int = 60, suffix: str = '...') -> str:
@@ -900,6 +901,31 @@ def split_name(full_name: str) -> Tuple[str, str]:
     first = parts[0] if parts else ''
     last = ' '.join(parts[1:]) if len(parts) > 1 else ''
     return (first, last)
+
+
+def split_sentences(string: str, maxsplit: int=0) -> List[str]:
+    """
+    Break input into sentences.
+
+    Args:
+        string:
+            Input string.
+        maxsplit:
+            If maxsplit is nonzero, at most maxsplit splits occur, and the
+            remainder of the string is returned as the final element of
+            the list.
+
+    Returns:
+        List of sentences.
+    """
+    parts = re.split(r"([\.\?\!]+)(?=\W)", string, maxsplit=maxsplit)
+    sentences = []
+    for start, end in zip_longest(parts[::2], parts[1::2]):
+        sentence = start if end is None else f"{start}{end}"
+        sentence = sentence.strip()
+        if sentence:
+            sentences.append(sentence)
+    return sentences
 
 
 def strip_blank(string: str) -> str:

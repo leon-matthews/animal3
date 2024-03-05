@@ -33,6 +33,7 @@ from ..text import (
     reverse_replace,
     sentences,
     split_name,
+    split_sentences,
     shorten,
     strip_blank,
     strip_tags,
@@ -905,6 +906,43 @@ class SplitNameTest(TestCase):
         first, last = split_name('Sacha Baron Cohen')
         self.assertEqual(first, 'Sacha')
         self.assertEqual(last, 'Baron Cohen')
+
+
+class SplitSentencesTest(TestCase):
+    def test_empty(self) -> None:
+        self.assertEqual(split_sentences(''), [])
+
+    def test_no_delimiter(self) -> None:
+        string = "This is a sentence without an ending"
+        expected = ['This is a sentence without an ending']
+        self.assertEqual(split_sentences(string), expected)
+
+    def test_single(self) -> None:
+        string = "This is a sentence with an ending."
+        expected = ['This is a sentence with an ending.']
+        self.assertEqual(split_sentences(string), expected)
+
+    def test_multiple(self) -> None:
+        string = (
+            "This is a short text. "
+            "It is to be used for testing only!!! "
+            "Don't doubt me...  "
+            "Or else!"
+        )
+        expected = [
+            "This is a short text.",
+            "It is to be used for testing only!!!",
+            "Don't doubt me...",
+            "Or else!",
+        ]
+        self.assertEqual(split_sentences(string), expected)
+
+    def test_decimal(self) -> None:
+        string = (
+            "What's new in Python 3.13?"
+        )
+        expected = ["What's new in Python 3.13?"]
+        self.assertEqual(split_sentences(string), expected)
 
 
 class StripBlankTest(TestCase):
