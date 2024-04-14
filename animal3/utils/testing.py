@@ -246,19 +246,12 @@ class DocTestLoader(type):
     In this work-around we use the module under test, but do not retain a
     reference to it for `multiprocessing` to choke on.
     """
-    def __new__(
-        meta: Type[type],
-        class_name: str,
-        bases: Tuple[type, ...],
-        /,
-        namespace: Dict,
-        **kwargs: Any,
-    ) -> type:
+    def __new__(*args: Any, **kwargs: Any) -> type:
         """
         Prevent `test_module` argument from going further.
         """
         kwargs.pop('test_module')
-        return type.__new__(meta, class_name, bases, namespace, **kwargs)
+        return type.__new__(*args, **kwargs)
 
     @classmethod
     def __prepare__(
@@ -267,7 +260,6 @@ class DocTestLoader(type):
         bases: Tuple[type, ...],
         /,
         **kwargs: Any,
-        # ~ test_module: ModuleType,
     ) -> Mapping[str, object]:
         """
         Create test methods and add them to the class.

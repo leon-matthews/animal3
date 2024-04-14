@@ -155,7 +155,6 @@ def currency(
 
     Returns:
         Short currency string
-
     """
     # Round amount to two decimal places, allow decimal input.
     try:
