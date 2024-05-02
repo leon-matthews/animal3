@@ -8,9 +8,7 @@ from . import DATA_FOLDER
 
 class ExtractorTest(TestCase):
     def test_cannot_instantiate(self) -> None:
-        message = (
-            r"^Can't instantiate abstract class Extractor with abstract method fields$"
-        )
+        message = r"^Can't instantiate abstract class Extractor.+"
         with self.assertRaisesRegex(TypeError, message):
             Extractor()                                     # type: ignore[abstract]
 

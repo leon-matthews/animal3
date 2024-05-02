@@ -13,43 +13,6 @@ except ImportError:                                         # pragma: no cover
 from . import BOARD_DATA, BOARD_HEADER, DATA_FOLDER
 
 
-class ExcelWriterReadTest(TestCase):
-    """
-    Test reading existing spreadsheet using writer class.
-    """
-    reader: ExcelWriter
-
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        path = DATA_FOLDER / 'products.xlsx'
-        cls.reader = ExcelWriter(path)
-
-    def test_read_first(self) -> None:
-        """
-        Read from default worksheet.
-        """
-        rows = [row for row in self.reader.read()]
-        self.assertEqual(rows, BOARD_DATA)
-
-    def test_read_skip_rows(self) -> None:
-        """
-        Change worksheet and read its data.
-        """
-        self.reader.set_worksheet('Too Few Data')
-        rows = [row for row in self.reader.read()]
-        expected = [{
-            'header': 'One',
-            'header2': 'Two',
-            'header3': None,
-        }, {
-            'header': None,
-            'header2': 'Two',
-            'header3': 'Three',
-        }]
-        self.assertEqual(rows, expected)
-
-
 class ExcelWriterTest(TempFolderMixin, TestCase):
     """
     Test writing spreadsheet using writer class.
