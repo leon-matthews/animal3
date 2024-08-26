@@ -11,7 +11,7 @@ JSON = Union[List[Any], Dict[str, Any]]
 
 
 def json_cache_simple(
-    path: os.PathLike[str],
+    path: os.PathLike,
     ttl: int = 3600,
 ) -> Callable[[Decorator], Decorator]:
     """
@@ -32,11 +32,11 @@ def json_cache_simple(
     Be aware that data undergoing a round-trip through a JSON file will
     lose some type information. Named tuples to plain lists, for example.
     """
-    def save_json(path: os.PathLike[str], data: JSON) -> None:
+    def save_json(path: os.PathLike, data: JSON) -> None:
         with open(path, 'wt') as fp:
             json.dump(data, fp)
 
-    def load_json(path: os.PathLike[str]) -> JSON:
+    def load_json(path: os.PathLike) -> JSON:
         with open(path, 'rt') as fp:
             return json.load(fp)                            # type: ignore[no-any-return]
 

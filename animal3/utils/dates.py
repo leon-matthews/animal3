@@ -224,9 +224,8 @@ def epoch_to_datetime(
 
     Returns: Timezone-aware datetime object
     """
-
     value = datetime.datetime.fromtimestamp(epoch)
-    return timezone.make_aware(value)
+    return timezone.make_aware(value, tz)
 
 
 def format_date(now: datetime.datetime, format_string: str) -> str:

@@ -1,8 +1,6 @@
 
 import datetime
-from datetime import UTC as utc
 from decimal import Decimal
-from zoneinfo import ZoneInfo
 
 from django.test import SimpleTestCase
 from django.utils import timezone
@@ -41,8 +39,11 @@ class DocTests(SimpleTestCase, metaclass=DocTestLoader, test_module=dates):
 
 
 # Create some handy tzinfo instances
-auckland = ZoneInfo('Pacific/Auckland')
-fiji = ZoneInfo('Pacific/Fiji')
+# TODO: ZoneInfo was added in Python 3.9, allowing:
+#   auckland = ZoneInfo('Pacific/Auckland')
+auckland = datetime.timezone(datetime.timedelta(hours=13), 'NZDT')
+sydney = datetime.timezone(datetime.timedelta(hours=11), 'AEDT')
+utc = datetime.timezone.utc
 
 
 class CalculateAgeTest(SimpleTestCase):
@@ -129,8 +130,8 @@ class DatetimeToEpochTest(SimpleTestCase):
         current = datetime.datetime(2009, 2, 13, 23, 31, 30)
         self.assertEqual(datetime_to_epoch(current), 1234567890)
 
-    def test_year_2038_in_fiji(self) -> None:
-        current = datetime.datetime(2038, 1, 19, 15, 14, 7, tzinfo=fiji)
+    def test_year_2038(self) -> None:
+        current = datetime.datetime(2038, 1, 19, 16, 14, 7, tzinfo=auckland)
         self.assertEqual(datetime_to_epoch(current), (2**31) - 1)
 
 
@@ -157,14 +158,14 @@ class EpochToDatetimeTest(SimpleTestCase):
         expected = datetime.datetime(2009, 2, 14, 12, 31, 30, tzinfo=auckland)
         self.assertEqual(date, expected)
 
-    def test_year_2038_in_fiji(self) -> None:
+    def test_year_2038(self) -> None:
         """
-        The end of all things... Let's go to Fiji!
+        The end of all things...
         """
         epoch = (2**31) - 1
-        date = epoch_to_datetime(epoch, fiji)
+        date = epoch_to_datetime(epoch)
         self.assertTrue(timezone.is_aware(date))
-        expected = datetime.datetime(2038, 1, 19, 15, 14, 7, tzinfo=fiji)
+        expected = datetime.datetime(2038, 1, 19, 16, 14, 7, tzinfo=auckland)
         self.assertEqual(date, expected)
 
 
@@ -308,13 +309,21 @@ class MonthStartEndTest(SimpleTestCase):
         self.assertTrue(timezone.is_aware(start))
         self.assertTrue(timezone.is_aware(end))
 
+        # TODO: Python 3.9+
+        # Once we drop Python 3.8 support we can remove the `.replace()`
+        # calls and compare dates directly using concrete ZoneInfo instances.
+        #
+        # The type of tzinfo changes depending the version of Python and even
+        # the version of Django installed. The former brings in the `zoneinfo`
+        # package in v3.9, and newer Django versions bring in the package
+        # `backports.zoneinfo` *if* running on old Python versions
         self.assertEqual(
-            start,
-            datetime.datetime(2021, 6, 1, 0, 0, 0, tzinfo=auckland),
+            start.replace(tzinfo=None),
+            datetime.datetime(2021, 6, 1, 0, 0, 0),
         )
         self.assertEqual(
-            end,
-            datetime.datetime(2021, 6, 30, 23, 59, 59, tzinfo=auckland),
+            end.replace(tzinfo=None),
+            datetime.datetime(2021, 6, 30, 23, 59, 59),
         )
 
 

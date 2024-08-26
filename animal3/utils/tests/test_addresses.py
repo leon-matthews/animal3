@@ -115,9 +115,7 @@ class AddressTest(TestCase):
         """
         The `commas` argument must be provided as keyword, not positional.
         """
-        message = (
-            r"^Address.to_multiline\(\) takes 1 positional argument but 2 were given$"
-        )
+        message = r"takes 1 positional argument but 2 were given"
         with self.assertRaisesRegex(TypeError, message):
             self.address.to_multiline(True)                 # type: ignore[misc]
 
