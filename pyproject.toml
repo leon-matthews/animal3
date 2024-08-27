@@ -9,7 +9,12 @@ name = "animal3"
 version = "0.1"
 dependencies = [
     "django==4.2.15",
+    "django-braces==1.15.0",
     "django-pipeline==3.1.0",
+    "sorl-thumbnail==12.10.0",
+]
+dev-dependencies = [
+    "logging-tree==1.10.0",
 ]
 description = "Collection of my core Django components"
 readme = "README.md"
