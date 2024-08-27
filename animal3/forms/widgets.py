@@ -69,7 +69,7 @@ class ArticleWidget(HtmlEditorWidget):
     https://imperavi.com/article/
     """
     css_class = 'article'
-    default_options = settings.ARTICLE_DEFAULTS
+    default_options = getattr(settings, 'ARTICLE_DEFAULTS', {})
 
     class Media(PipelineFormMedia):                         # type: ignore[no-any-unimported]
         css_packages = {'all': ('article',)}
@@ -86,7 +86,7 @@ class Article2Widget(HtmlEditorWidget):
     https://imperavi.com/article/
     """
     css_class = 'article2'
-    default_options = settings.ARTICLE2_DEFAULTS
+    default_options = getattr(settings, 'ARTICLE2_DEFAULTS', {})
 
     class Media(PipelineFormMedia):                         # type: ignore[no-any-unimported]
         css_packages = {'all': ('article2',)}
@@ -103,7 +103,7 @@ class RedactorWidget(HtmlEditorWidget):
     https://imperavi.com/redactor/
     """
     css_class = 'redactor3'
-    default_options = settings.REDACTOR_DEFAULTS
+    default_options = getattr(settings, 'REDACTOR_DEFAULTS', {})
 
     class Media(PipelineFormMedia):                         # type: ignore[no-any-unimported]
         css_packages = {'all': ('redactor',)}
