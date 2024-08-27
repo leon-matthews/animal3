@@ -1,0 +1,10 @@
+<div class="field">
+{% if label %}
+<label class="label">{{ label }}</label>
+{% endif %}
+
+<div class="control">
+{{ widget }}
+</div>
+{% include './errors_and_help.html' %}
+</div>
