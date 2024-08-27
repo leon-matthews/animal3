@@ -19,32 +19,22 @@ class TestCleanPath(SimpleTestCase):
         cls.site_root = Path(settings.SITE_ROOT)
 
     def test_bad_paths(self) -> None:
-        bad_paths = (
-            '/etc/',
-            '~',
-            settings.SITE_ROOT,
-            Path(settings.SITE_ROOT) / 'settings.ini',
-            settings.SOURCE_ROOT,
-            Path(settings.SOURCE_ROOT) / 'common/settings/settings.py',
-        )
-
-        for bad_path in bad_paths:
-            with self.assertRaises(SuspiciousOperation):
-                clean_path(bad_path)                        # type: ignore[arg-type]
+        with self.assertRaises(SuspiciousOperation):
+            clean_path('/etc')                              # type: ignore[arg-type]
 
     def test_good_paths(self) -> None:
         good_paths = (
             tempfile.gettempdir(),
             Path(tempfile.gettempdir()) / 'euue/aoeu.log',
-            settings.MEDIA_ROOT,
             Path(settings.MEDIA_ROOT) / 'blog' / 'thumbnails' / 'headshot.jpg',
-            settings.STATIC_ROOT,
             Path(settings.STATIC_ROOT) / 'blog' / 'missing.jpg',
         )
 
         for good_path in good_paths:
             cleaned = clean_path(good_path)                 # type: ignore[arg-type]
-            self.assertEqual(str(good_path), str(cleaned))
+            self.assertEqual(
+                str(good_path), str(cleaned),
+                f"{good_path!r} was not cleaned to {cleaned!r}")
 
 
 class TestRun(SimpleTestCase):

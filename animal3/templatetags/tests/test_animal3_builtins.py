@@ -87,11 +87,11 @@ class AddGSTTest(SimpleTestCase):
 
 
 class AppInstalledTest(SimpleTestCase):
-    def test_add_gst(self) -> None:
+    def test_apps_installed(self) -> None:
         context: Dict[str, Any] = {}
         template = multiline("""
             {% load animal3_builtins %}
-            {{ 'common'|app_installed }}
+            {{ 'animal3'|app_installed }}
             {{ 'twinkle'|app_installed }}
         """)
         expected = multiline("""
