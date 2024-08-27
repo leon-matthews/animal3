@@ -13,5 +13,5 @@ if __name__ == "__main__":
     django.setup()
     TestRunner = get_runner(settings)
     test_runner = TestRunner()
-    failures = test_runner.run_tests(["animal3"])
+    failures = test_runner.run_tests(['animal3'])
     sys.exit(bool(failures))
