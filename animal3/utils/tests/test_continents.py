@@ -11,6 +11,13 @@ from ..continents import (
     ASIA,
     CONTINENTS,
     EUROPE,
+    in_africa,
+    in_antarctica,
+    in_asia,
+    in_europe,
+    in_north_america,
+    in_oceania,
+    in_south_america,
     NORTH_AMERICA,
     OCEANIA,
     SOUTH_AMERICA,
@@ -95,3 +102,12 @@ class ContinentsTest(TestCase):
         self.assertEqual(countries[0], "AR")                # Argentina
         self.assertEqual(countries[-1], "VE")               # Venezuela
         self.assertEqual(set(countries), SOUTH_AMERICA)
+
+    def test_boolean_functions(self) -> None:
+        self.assertTrue(in_africa("EG"))                    # Egypt
+        self.assertTrue(in_antarctica("AQ"))                # Antarctia
+        self.assertTrue(in_asia("JP"))                      # Japan
+        self.assertTrue(in_europe("FR"))                    # France
+        self.assertTrue(in_north_america("CA"))             # Canada
+        self.assertTrue(in_oceania("NZ"))                   # New Zealand
+        self.assertTrue(in_south_america("BR"))             # Brazil

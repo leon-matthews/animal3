@@ -1,4 +1,53 @@
 
+def in_africa(code: str) -> bool:
+    """
+    Is the given 2-character country code for a country in Africa?
+    """
+    return code in AFRICA
+
+
+def in_antarctica(code: str) -> bool:
+    """
+    Is the given 2-character country code for a country in Antarctica?
+    """
+    return code in ANTARCTICA
+
+
+def in_asia(code: str) -> bool:
+    """
+    Is the given 2-character country code for a country in Asia?
+    """
+    return code in ASIA
+
+
+def in_europe(code: str) -> bool:
+    """
+    Is the given 2-character country code for a country in Europe?
+    """
+    return code in EUROPE
+
+
+def in_north_america(code: str) -> bool:
+    """
+    Is the given 2-character country code for a country in North America?
+    """
+    return code in NORTH_AMERICA
+
+
+def in_oceania(code: str) -> bool:
+    """
+    Is the given 2-character country code for a country in Oceania?
+    """
+    return code in OCEANIA
+
+
+def in_south_america(code: str) -> bool:
+    """
+    Is the given 2-character country code for a country in South America?
+    """
+    return code in SOUTH_AMERICA
+
+
 """
 Mapping between continent code and its name.
 """
