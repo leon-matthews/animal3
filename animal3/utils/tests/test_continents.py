@@ -1,8 +1,5 @@
 
-from typing import List
-from unittest import skip, TestCase
-
-from animal3.utils.iso_3166 import ALPHA_2
+from unittest import TestCase
 
 from ..continents import (
     AFRICA,
@@ -11,6 +8,8 @@ from ..continents import (
     ASIA,
     CONTINENTS,
     EUROPE,
+    find_continent,
+    find_countries,
     in_africa,
     in_antarctica,
     in_asia,
@@ -24,19 +23,22 @@ from ..continents import (
 )
 
 
-def find_countries(continent_code: str) -> List[str]:
-    """
-    Build sorted list of country ALPHA_2 codes for the given continent code.
-    """
-    country_codes = []
+class FindContinent(TestCase):
+    def test_find_britain(self) -> None:
+        continent = find_continent("GB")
+        self.assertEqual(continent, "EU")
 
-    for alpha2, _ in ALPHA_2:
-        continent = ALPHA2_TO_CONTINENT[alpha2]
-        if continent == continent_code:
-            country_codes.append(alpha2)
+    def test_key_error(self) -> None:
+        message = r"Invalid country code: 'ABC'"
+        with self.assertRaisesRegex(KeyError, message):
+            find_continent('ABC')
 
-    country_codes.sort()
-    return country_codes
+
+class FindCountriesTest(TestCase):
+    def test_find_countries(self) -> None:
+        countries = find_countries('AN')
+        expected = ['AQ', 'BV', 'GS', 'HM']
+        self.assertEqual(countries, expected)
 
 
 class ContinentsTest(TestCase):

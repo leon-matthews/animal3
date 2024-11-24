@@ -1,4 +1,46 @@
 
+from typing import List
+
+from animal3.utils.iso_3166 import ALPHA_2
+
+
+def find_continent(country_code: str) -> (str, str):
+    """
+    Find continent from given country code.
+
+    Args:
+        code:
+            2-character country code for a country
+
+    Raises:
+        KeyError:
+            If country code is invalid.
+
+    Returns:
+        2-tuple containing continent code name, in that order.
+    """
+    try:
+        continent = ALPHA2_TO_CONTINENT[country_code]
+    except KeyError:
+        raise KeyError(f"Invalid country code: {country_code!r}") from None
+    return continent
+
+
+def find_countries(continent_code: str) -> List[str]:
+    """
+    Build sorted list of country ALPHA_2 codes for the given continent code.
+    """
+    country_codes = []
+
+    for alpha2, _ in ALPHA_2:
+        continent = ALPHA2_TO_CONTINENT[alpha2]
+        if continent == continent_code:
+            country_codes.append(alpha2)
+
+    country_codes.sort()
+    return country_codes
+
+
 def in_africa(code: str) -> bool:
     """
     Is the given 2-character country code for a country in Africa?
